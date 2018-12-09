@@ -11,6 +11,7 @@
 
 #afterClick{background-color:rgb(183, 240, 172); visibility: hidden;}
 #results{background-color: rgb(183, 240, 172);}
+#questions{visibility: hidden;}
 
 
 body{background-image: url("assets/images/b11.jpeg")}
@@ -105,32 +106,21 @@ img{height: 200px; width: 300px;}
                         <img id="gif">
                     </div>
 
-                    <div id="results" style="text-align: center;">
+                    <div id="results" style="text-align: center; margin-bottom: 20px;">
                         <p id="resultsCorrect">Correct answers: </p>
                         <p id="resultsIncorrect">Incorrect answers: </p>
                         <!-- <p id="noAnswer">Not answered: </p> -->
-                        <button type="button" class="btn btn-primary btn-sm">Start over?</button>      
+                        <button type="button" class="btn btn-primary btn-sm" onclick= "startQuiz();">Start over?</button>      
                     </div>
                      
         </div>   
-        <div id="playground">
+        
 
-        </div>
+
     </div>
 
 </div>
 
-
-
-      <!-- <div class="card text-center" style="width: 100%;">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Cras justo odio</li>
-            </ul>
-          </div> -->
 
 
   <script src="assets/javascript/app.js"></script> 
@@ -138,6 +128,7 @@ img{height: 200px; width: 300px;}
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="assets/javascript//playground.js"></script>
+
 </body>
 </html>
+

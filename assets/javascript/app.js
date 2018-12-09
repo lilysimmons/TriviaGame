@@ -7,7 +7,7 @@ var resultsCorrect = 0;
 var resultsIncorrect = 0;
 // var noAnswer = 0;
 var seconds = 15;
-var clockRunning = false
+// var clockRunning = false
 // var time = 0;
 
 var questionIndex = 0;
@@ -21,75 +21,125 @@ var intervalId;
 function startQuiz() {
 
     startQuiz.onlick = startTimer();
-    
-    
+
+
+
 }
-        
 
-     
-     
-     
-    
-     
- 
-    
 
-     //logic to start game
+var questions = [
+    {
+        display: "What is the name of Rocko's dog?",
+        answers: ["Sparky", "Spanner", "Punkin", "Spunky", "Sputnik"],
+        correctAnswer: "Spunky",
+        imageSrc: "assets/images/spunky.gif",
+        message: "The name of Rocko's dog is Spunky.",
 
-    //display answer (that's another function)
+    },
+    {
+        display: "Which is NOT a team on Legends of the Hidden Temple?",
+        answers: ["Green Monkeys", "Purple Parrots", "Orange Orangutans", "Silver Snakes", "Red Jaguars"],
+        correctAnswer: "Orange Orangutans",
+        imageSrc: "assets/images/Legends.gif",
+        message: "Orange Orangutans' is not a team on Legends of the Hidden Temple."
 
-    //start timer (maybe another)
+    },
+    {
+        display: "What is always the final challenge in Nickelodeon GUTS?",
+        answers: ["Vertiboggan", "Aggro Crag", "Slam-A-Jama", "Eat My Dust", "Dodge It"],
+        correctAnswer: "Aggro Crag",
+        imageSrc: "assets/images/aggroCrag.gif",
+        message: "The fifth and final event is the Aggro Crag.",
+    },
 
-    //reset score (maybe )
+    {
+        display: "What is Stimpy's favorite song?",
+        answers: ["Every Wants a Log", "Tickle Tickle Ichy Pickle", "I LOVE MY LITTER", "Three Blind Mice", "HAPPY HAPPY JOY JOY!!"],
+        correctAnswer: "HAPPY HAPPY JOY JOY!!",
+        imageSrc: "assets/images/REV.gif",
+        message: "Stimpy's favorite song is HAPPY HAPPY JOY JOY!!",
+    },
+
+    // {
+    //     display: "What does the monster community use as currency in 'Aaahh!!! Real Monsters'?",
+    //     answers: ["toe nails", "boogers", "nuts and bolts", "Hair clippings", "skin flakes"],
+    //     correctAnswer: "toe nails",
+    //     imageSrc: "assets/images/monsters.gif",
+    //     message: "The monsters use toe nails as a form of currency.",
+    // },
+]
+
+
+
+
+
+
+
+//logic to start game
+
+//display answer (that's another function)
+
+//start timer (maybe another)
+
+//reset score (maybe )
 
 
 function nextQuestion() {
-    if(resultsCorrect + resultsIncorrect === questions.length){
-
-
-
-
-        
-    }
+   if (questions[questionsIndex] < questions.length){
+    questionIndex++;
+    timerReset();
     $("#questions").css("visibility", "visible");
     $("#afterClick").css("visibility", "hidden");
-    questionIndex++;
     displayAnswers();
-    $(".answerSection").on("click", ".answer", function () {
-        var userAnswer = $(this).text();
-        if (userAnswer === questions[questionIndex].correctAnswer) {
-            $("#afterClick").css("visibility", "visible");
-            $("#confirm").text("Correct!! " + questions[questionIndex].message);
-            $("#gif").attr("src", questions[questionIndex].imageSrc);
-            resultsCorrect++;
-            $("#correctAnswer").text("Correct answers: " + resultsCorrect);
-            setTimeout(nextQuestion, 5000);
+    answerSection();
 
-        }
-        else {
-            $("#afterClick").css("visibility", "visible");
-            $("#confirm").text("Wrong!! " + questions[questionIndex].message);
-            $("#gif").attr("src", questions[questionIndex].imageSrc);
-            resultsIncorrect++;
-            $("#incorrectAnswer").text("Incorrect answers: " + resultsIncorrect);
-            setTimeout(nextQuestion, 5000);
-    
-        };
-    //increment score (right or wrong)
-    
-    });   
+   }
+
+   else if (questions[questionsIndex] === questions.length){
+       resetQuiz();
+   }
+   
+
+    // $(".answerSection").on("click", ".answer", function () {
+    //     var userAnswer = $(this).text();
+    //     if (userAnswer === questions[questionIndex].correctAnswer) {
+    //         $("#afterClick").css("visibility", "visible");
+    //         $("#confirm").text("Correct!! " + questions[questionIndex].message);
+    //         $("#gif").attr("src", questions[questionIndex].imageSrc);
+    //         resultsCorrect++;
+    //         $("#resultsCorrect").text("Correct answers: " + resultsCorrect);
+    //         setTimeout(nextQuestion, 5000);
+
+    //     }
+    //     else {
+    //         $("#afterClick").css("visibility", "visible");
+    //         $("#confirm").text("Wrong!! " + questions[questionIndex].message);
+    //         $("#gif").attr("src", questions[questionIndex].imageSrc);
+    //         resultsIncorrect++;
+    //         $("#resultsIncorrect").text("Incorrect answers: " + resultsIncorrect);
+    //         setTimeout(nextQuestion, 5000);
+
+    //     };
+    // //increment score (right or wrong)
+
+    // });   
 
     //restart timer
-    startTimer();
+    // resetTimer();
 
 }
 
 
 function startTimer() {
- 
-     intervalId = setInterval(count, 1000);
- }
- 
+
+    intervalId = setInterval(count, 1000);
+    
+    $("#startButton").css("visibility", "hidden");
+    $("#questions").css("visibility", "visible");
+
+
+}
+
 
 
 function count() {
@@ -98,102 +148,66 @@ function count() {
     console.log(seconds);
 
     if (seconds === 0) {
-       timerReset(); 
-    }
-    else if (seconds > 0){
-
-        $(".answerSection").on("click", ".answer", function(){
-        clearInterval(intervalId);
         timerReset();
-        
-    });
-}  
-        
-    $("#questionTimer").html("<p>" + seconds + "</p");
 
-}
-
-function timerReset(){
-    seconds = 15;
-    
-}
-
-
-function stopTimer() {
-
-    $(".answerSection").on("click", ".answer", function(){
-        clearInterval(intervalID);
-        
-    });
-       
-
-}
-
-var questions = [
-        {
-            display: "What is the name of Rocko's dog?",
-            answers: ["Sparky", "Spanner", "Punkin", "Spunky", "Sputnik"],
-            // displayQuestion: function(){
-            //     return this.display;
-            // },
-            //triviaAnswers: function(i){
-            // for(var i = 0; i < this.answers.length; i++){
-
-            //       return this.answers[i];
-
-            // }
-
-            //},
-            correctAnswer: "Spunky",
-            imageSrc: "assets/images/spunky.gif",
-            message: "The name of Rocko's dog is Spunky."
-            // correctAnswerId: "#answer4",
-            // incorrectAnswerId: ["#answer1", "#answer2", "#answer3", "#answer5"]
-
-        },
-        {
-            display: "Which is NOT a team on Legends of the Hidden Temple?",
-            answers: ["Green Monkeys", "Purple Parrots", "Orange Orangutans", "Silver Snakes", "Red Jaguars"],
-            correctAnswer: "Orange Orangutans",
-            imageSrc: "assets/images/Legends.gif",
-            message: "Orange Orangutans' is not a team on Legends of the Hidden Temple."
-
-        }
-    ]
-    //var question1 = 
-
-
-
-    function displayAnswers() {
-        //loop through answers array
-        var q = questions[questionIndex]
-        $("#triviaQuestion").html(q.display);
-        for (var i = 0; i < q.answers.length; i++) {
-            var id = i + 1;
-            $("#answer" + id).html(q.answers[i]);
-
-        }
     }
+    // else if (seconds > 0){
 
-    // $("#answer1").html(question1.answers[i]);
-    // $("#answer2").html(question1.triviaAnswers(1));
-    // $("#answer3").html(question1.triviaAnswers(2));
-    // $("#answer4").html(question1.triviaAnswers(3));
-    // $("#answer5").html(question1.triviaAnswers(4));
-
-    //if
-    // $(question1.correctAnswerId).click(function(){
-
+    //     $(".answerSection").on("click", ".answer", function(){
+    //     clearInterval(intervalId);
+    //     timerReset();
 
     // });
+    $("#questionTimer").html("<p>" + seconds + "</p");
+}
 
-    // for(var i = 0; i < question1.incorrectAnswerId.length; i++){
-    //     $(question1.incorrectAnswerId[i]).click(function(){
 
 
-    //     });
-    // }
 
+
+function timerReset() {
+    seconds = 15;
+
+}
+
+
+function resetQuiz() {
+
+ if (questions[questionIndex] > 4){
+    clearInterval(intervalID);
+    resultsCorrect = 0;
+    resultsIncorrect = 0;
+    startQuiz();}
+
+    }
+
+    
+    
+
+  
+    
+
+
+
+
+
+
+
+function displayAnswers() {
+    //loop through answers array
+    var q = questions[questionIndex]
+    $("#triviaQuestion").html(q.display);
+    for (var i = 0; i < q.answers.length; i++) {
+        var id = i + 1;
+        $("#answer" + id).html(q.answers[i]);
+
+    }
+    console.log(q.display);
+}
+
+
+
+function answerSection() {
     $(".answerSection").on("click", ".answer", function () {
         var userAnswer = $(this).text();
         if (userAnswer === questions[questionIndex].correctAnswer) {
@@ -202,7 +216,7 @@ var questions = [
             $("#confirm").text("Correct!! " + questions[questionIndex].message);
             $("#gif").attr("src", questions[questionIndex].imageSrc);
             resultsCorrect++;
-            $("#correctAnswer").text("Correct answers: " + resultsCorrect);
+            $("#resultsCorrect").text("Correct answers: " + resultsCorrect);
             setTimeout(nextQuestion, 5000);
 
         }
@@ -212,48 +226,25 @@ var questions = [
             $("#confirm").text("Wrong!! " + questions[questionIndex].message);
             $("#gif").attr("src", questions[questionIndex].imageSrc);
             resultsIncorrect++;
-            $("#incorrectAnswer").text("Incorrect answers: " + resultsIncorrect);
+            $("#resultsIncorrect").text("Incorrect answers: " + resultsIncorrect);
             setTimeout(nextQuestion, 5000);
         }
-        // nextQuestion();
+        
     });
 
-    // var count = 30;
-
-    // var counter = setInterval(count, 1000);
-
-    // function startTimer(){
-
-    // count--;
-
-    //   if (count === 0)
-    //   {
-    //      clearInterval(counter);
-    //      return counter;
-
-    //      }
-
-    // console.log(counter);
-    // $("#questionTimer").html("<p>" + counter + "</p");
-    // }
+}
 
 
 
 
 
-    displayAnswers();
 
 
 
-// var question2 = {
-//     display = "Which is NOT a team on Legends of the Hidden Temple?"; 
 
-// }
+displayAnswers();
+answerSection();
 
 
-// var question3 ={
-//  display: "What was the always the final challenge on Nickelodeon GUTS?"
-
-// }
 
 
