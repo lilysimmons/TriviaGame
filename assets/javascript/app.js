@@ -7,18 +7,17 @@ var resultsCorrect = 0;
 var resultsIncorrect = 0;
 // var noAnswer = 0;
 var seconds = 15;
-// var clockRunning = false
-// var time = 0;
+// var intervalId
 
 var questionIndex = 0;
-// var triviaAnswers;
+
 
 var intervalId;
 
 
-// var intervalId
 
-function startQuiz() {
+// onclick for start quiz button, sends you to start timer function and the buttons hides
+function startQuiz() {  
 
     startQuiz.onlick = startTimer();
 
@@ -26,6 +25,10 @@ function startQuiz() {
 
 }
 
+// my questions array.  Having a lot of problems with this. 
+// For some reason index 2 & 3 fire at the same time so it skips index 2. 
+// Check console log. 
+// I commented out the last index, because it only gives an error.
 
 var questions = [
     {
@@ -41,7 +44,7 @@ var questions = [
         answers: ["Green Monkeys", "Purple Parrots", "Orange Orangutans", "Silver Snakes", "Red Jaguars"],
         correctAnswer: "Orange Orangutans",
         imageSrc: "assets/images/Legends.gif",
-        message: "Orange Orangutans' is not a team on Legends of the Hidden Temple."
+        message: "'Orange Orangutans' is not a team on Legends of the Hidden Temple."
 
     },
     {
@@ -71,21 +74,12 @@ var questions = [
 
 
 
-
-
-
-
-//logic to start game
-
-//display answer (that's another function)
-
-//start timer (maybe another)
-
-//reset score (maybe )
-
+// I tried to put an if statement to check if my questions array ended,
+// but the rest of the code wouldn't run.  I decided to leave out the end of game function,
+// so you could at least see the questions and gifs change
 
 function nextQuestion() {
-   if (questions[questionsIndex] < questions.length){
+//    if (questions[questionIndex] < 4){
     questionIndex++;
     timerReset();
     $("#questions").css("visibility", "visible");
@@ -93,39 +87,6 @@ function nextQuestion() {
     displayAnswers();
     answerSection();
 
-   }
-
-   else if (questions[questionsIndex] === questions.length){
-       resetQuiz();
-   }
-   
-
-    // $(".answerSection").on("click", ".answer", function () {
-    //     var userAnswer = $(this).text();
-    //     if (userAnswer === questions[questionIndex].correctAnswer) {
-    //         $("#afterClick").css("visibility", "visible");
-    //         $("#confirm").text("Correct!! " + questions[questionIndex].message);
-    //         $("#gif").attr("src", questions[questionIndex].imageSrc);
-    //         resultsCorrect++;
-    //         $("#resultsCorrect").text("Correct answers: " + resultsCorrect);
-    //         setTimeout(nextQuestion, 5000);
-
-    //     }
-    //     else {
-    //         $("#afterClick").css("visibility", "visible");
-    //         $("#confirm").text("Wrong!! " + questions[questionIndex].message);
-    //         $("#gif").attr("src", questions[questionIndex].imageSrc);
-    //         resultsIncorrect++;
-    //         $("#resultsIncorrect").text("Incorrect answers: " + resultsIncorrect);
-    //         setTimeout(nextQuestion, 5000);
-
-    //     };
-    // //increment score (right or wrong)
-
-    // });   
-
-    //restart timer
-    // resetTimer();
 
 }
 
@@ -171,9 +132,10 @@ function timerReset() {
 }
 
 
+// I could not get my game to reset
 function resetQuiz() {
 
- if (questions[questionIndex] > 4){
+ if (questions.length > 4){
     clearInterval(intervalID);
     resultsCorrect = 0;
     resultsIncorrect = 0;
@@ -205,7 +167,9 @@ function displayAnswers() {
     console.log(q.display);
 }
 
-
+// There is a div that displays, however I have it hidden. The idea was I would unhide it
+// until the end of the game, and then make if visible If you want to check if it's functional, just take of the 
+// visibility on css. You can see the div in the HTML.
 
 function answerSection() {
     $(".answerSection").on("click", ".answer", function () {
